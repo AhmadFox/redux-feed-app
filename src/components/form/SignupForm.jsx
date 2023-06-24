@@ -28,11 +28,11 @@ const SignupForm = () => {
       </div>
       <div className="col-span-2">
         <label className="mb-2 text-gray-700 capitalize block font-medium">Password:</label>
-        <InputBox holder={'Ex: XXXXXX'} type={'password'} addStyle={'bg-purple-50 border border-purple-300 w-full'}/>
+        <InputBox holder={'Ex: xxxxxx'} type={'password'} addStyle={'bg-purple-50 border border-purple-300 w-full'}/>
       </div>
       <div className="col-span-2">
         <label className="mb-2 text-gray-700 capitalize block font-medium">Conferm Password:</label>
-        <InputBox holder={'Ex: XXXXXX'} type={'password'} addStyle={'bg-purple-50 border border-purple-300 w-full'}/>
+        <InputBox holder={'Ex: xxxxxx'} type={'password'} addStyle={'bg-purple-50 border border-purple-300 w-full'}/>
       </div>
       <button className='col-span-2 mt-2 bg-purple-800 text-purple-100 hover:bg-purple-900 ease-in-out duration-300 px-6 py-3 rounded-md uppercase font-bold'>Sign Up</button>
     </form>

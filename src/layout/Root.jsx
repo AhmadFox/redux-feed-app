@@ -43,7 +43,7 @@ const Root = () => {
 
         <Modal heading={'Create Post'} show={ModalPost} setShow={setModalPost}>
           <div className="p-6">
-            <PostForm />
+            <PostForm isModal={setModalPost} />
           </div>
         </Modal>
 

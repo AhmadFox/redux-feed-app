@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+
+import store from './store/store';
 
 // Styles
 import './assets/styles/index.css';
@@ -63,7 +66,7 @@ const routers = createBrowserRouter([
             element: <Posts />
           },
           {
-            path: ':id',
+            path: ':postId',
             element: <Post />
           }
         ]
@@ -92,7 +95,11 @@ const routers = createBrowserRouter([
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<RouterProvider router={routers}/>);
+root.render(
+  <Provider store={store}>
+    <RouterProvider router={routers}/>
+  </Provider>
+  );
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

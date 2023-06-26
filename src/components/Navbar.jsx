@@ -1,10 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 
 import Logo from '../assets/images/logo.svg';
 import Container from './ui/Container';
 import Dropdown from './ui/Dropdown';
+
 const  Navbar = () => {
+
+	const user = useSelector( state => state.users );
+	// console.log('Navbar', user);
 
 	const [ menu, setMenu ] = useState(false);
 

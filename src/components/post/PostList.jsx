@@ -1,11 +1,8 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 import PostBox from './PostBox';
 
-const PostList = () => {
-
-	const posts = useSelector(state => state.posts)
+const PostList = ({posts}) => {
 
 	const postsRender = posts.map((post, idx) => (
 		<PostBox key={idx} post={post} />

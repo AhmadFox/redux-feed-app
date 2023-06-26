@@ -25,7 +25,7 @@ import Posts from './page/Posts';
 // Components
 import LoginForm from './components/form/LoginForm';
 import SignupForm from './components/form/SignupForm';
-import Post from './components/post/Post';
+import SinglePost from './components/post/SinglePost';
 import AutherProfile from './components/auther/AutherProfile';
 
 
@@ -49,7 +49,7 @@ const routers = createBrowserRouter([
             element: <Authers />
           },
           {
-            path: ':id',
+            path: ':userId',
             element: <AutherProfile />
           }
         ]
@@ -67,7 +67,7 @@ const routers = createBrowserRouter([
           },
           {
             path: ':postId',
-            element: <Post />
+            element: <SinglePost />
           }
         ]
       }

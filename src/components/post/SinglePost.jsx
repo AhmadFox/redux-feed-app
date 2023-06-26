@@ -8,15 +8,20 @@ import { Link } from 'react-router-dom';
 import PostList from './PostList';
 import PostForm from '../form/PostForm';
 
-const Post = () => {
-    const [ open, setOpen ] = useState(false);
+const SinglePost = () => {
 
+    const [ open, setOpen ] = useState(false);
     const { postId } = useParams();
 
     const post = useSelector(state =>
-        state.posts.find(post => post.id === postId)
+        state.posts.find(post => post.id == postId)
     );
 
+    const userId = post.user.id;
+    const relatedPosts = useSelector(state =>
+        state.posts.filter(posts => posts.user.id == userId && posts.id != postId )
+    );
+        
     // Show/Hide Post Form
     const editPostHandler = () => {
         setOpen(true)
@@ -39,16 +44,21 @@ const Post = () => {
                 </Fragment>
                 :
                 <Fragment>
-                    <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-start justify-between mb-6">
                         <h1 className="text-gray-700 text-xl md:text-2xl xl:text-3xl font-bold">{post.title}</h1>
                         <button onClick={editPostHandler} className='uppercase text-purple-700 font-medium hover:text-purple-800 ease-in-out duration-300'>edit</button>
                     </div>
 
-                    <div className="flex items-center gap-x-3 mb-6">
-                        <span className='text-gray-600 font-medium'>By: <Link to={`/authers/${post.user[0].id}`} className='text-purple-600'>{post.user[0].name}</Link></span>
-                        <span className='text-gray-600'>|</span>
-                        <span className='text-gray-600 font-medium'>{post.date}</span>
+                    <div className="flex justify-between items-center mb-6">
+                        <div className="flex items-center gap-x-3">
+                            <span className='text-gray-600 font-medium'>By: <Link to={`/authers/${post.user.id}`} className='text-purple-600'>{post.user.name}</Link></span>
+                            <span className='text-gray-600'>|</span>
+                            <span className='text-gray-600 font-medium'>{post.date}</span>
+
+                        </div>
+                        <span className={`px-4 py-2 rounded-full uppercase font-semibold text-xs text-white bg-${post.category.color}`}>{post.category.name}</span>
                     </div>
+
                     
                     <p className='text-gray-600 md:text-lg mb-6'>{post.content}</p>
                     
@@ -70,16 +80,20 @@ const Post = () => {
                 </Fragment>
             }
             
-
-            <hr className='my-9' />
-
-            <p className="font-bold text-lg md:text-xl xl:text-2xl text-gray-600 mb-6">More By {post.user[0].name}</p>
-
-            <PostList />
+            {
+                relatedPosts.length > 0 ? 
+                <Fragment>
+                    <hr className='my-9' />
+                    <p className="font-bold text-lg md:text-xl xl:text-2xl text-gray-600 mb-6">More By {post.user.name}</p>
+                    <PostList posts={relatedPosts} />
+                </Fragment>
+                : ''
+            }
+            
 
         </div>
     </Section>
   )
 }
 
-export default Post
+export default SinglePost

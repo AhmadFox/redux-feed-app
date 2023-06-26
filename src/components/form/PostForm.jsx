@@ -50,11 +50,9 @@ const PostForm = ({btnCaption, setSave, isModal, post}) => {
 			content,
 			category: categorys.find((item) => item.value == category ),
 			date: dateFormat,
-			user: [
-				{
-					name: 'Hani Salam', id: 5, account: 'auther'
-				}
-			]
+			user: {
+				name: 'Hani Salam', id: 5, account: 'auther'
+			}
 		});
 
 		setTitle('')
@@ -71,8 +69,6 @@ const PostForm = ({btnCaption, setSave, isModal, post}) => {
 
 		isModal && isModal(false)
 	}
-
-
 
 	return (
 		<form onSubmit={submitHandler} action="" className='grid grid-cols-2 gap-4'>
@@ -95,7 +91,7 @@ const PostForm = ({btnCaption, setSave, isModal, post}) => {
 			<div className="flex gap-x-3">
 				<button disabled={!validForm} className='px-8 py-2.5 text-sm rounded-full bg-purple-700 hover:bg-purple-800 text-white font-semibold uppercase ease-in-out duration-300'>{btnCaption ? btnCaption : 'Post'}</button>
 				{
-					post && <button onClick={() => setSave(false)} className='px-6 py-2.5 text-sm rounded-full text-purple-700 hover:text-white border border-purple-700 hover:border-purple-800 hover:bg-purple-800 font-semibold uppercase ease-in-out duration-300'>Cancle</button>
+					post && <button onClick={() => setSave(false)} className='px-6 py-2.5 text-sm rounded-full text-gray-700 hover:text-white border border-gray-700 hover:gray-purple-800 hover:bg-gray-800 font-semibold uppercase ease-in-out duration-300'>Cancle</button>
 				}
 			</div>
 

@@ -1,10 +1,13 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import InputBox from './form/InputBox';
 import AutherBox from './auther/AutherBox';
 
 const SideBar = () => {
+
+	const users = useSelector( state => state.users);
 
 	return (
 		<aside className='xl:bg-white xl:shadow-lg xl:px-4 xl:py-6 rounded-lg mb-9 xl:mb-0'>
@@ -38,9 +41,9 @@ const SideBar = () => {
 				<p className="text-gray-500 font-bold text-lg uppercase">Authers</p>
 				<hr className='mt-3 mb-5' />
 				<div className="grid gap-y-6">
-					<AutherBox />
-					<AutherBox />
-					<AutherBox />
+					{ users.map( user => (
+						<AutherBox key={user.id} id={user.id} autherName={`${user.firstName} ${user.lastName}`} postCount={user.postCount} />
+					)) }
 					<Link to='authers' className='text-center text-purple-600 hover:text-purple-800 capitalize ease-in-out duration-300'>View All Authers</Link>
 				</div>
 			</div>

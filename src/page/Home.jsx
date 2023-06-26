@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import Section from '../components/ui/Section';
 import SideBar from '../components/SideBar';
@@ -6,6 +7,8 @@ import PostForm from '../components/form/PostForm';
 import PostList from '../components/post/PostList';
 
 const Home = () => {
+
+	const posts = useSelector( state => state.posts)
 	return (
 		<Section>
 			<div className="grid grid-cols-12 gap-x-6">
@@ -18,7 +21,7 @@ const Home = () => {
 					<hr className='my-6' />
 					<p className="text-gray-700 text-xl font-bold mb-6">Post Feeds</p>
 
-					<PostList />
+					<PostList posts={posts} />
 
 				</div>
 

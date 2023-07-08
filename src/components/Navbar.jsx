@@ -1,21 +1,27 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { Fragment, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { Popover, Transition } from '@headlessui/react';
 
 import Logo from '../assets/images/logo.svg';
+import Avatar from '../assets/images/logo-mono.png'
 import Container from './ui/Container';
 import Dropdown from './ui/Dropdown';
 
-const  Navbar = () => {
-
-	const user = useSelector( state => state.users );
-	// console.log('Navbar', user);
+const  Navbar = ({ userInfo, logInState }) => {
 
 	const [ menu, setMenu ] = useState(false);
 
 	const openMenu = () => {
+		
 		setMenu(!menu);
+
 	}
+
+	const logout = () => {
+		sessionStorage.removeItem('access_token');
+		logInState(false);
+	}
+
 
 	return (
 		<nav className='bg-zinc-900 py-4 shadow-lg'>
@@ -74,7 +80,42 @@ const  Navbar = () => {
 						</Dropdown>
 						
 						<hr className='my-4 lg:hidden border-zinc-700'/>
-						<Link to='registration' className='lg:text-sm text-gray-100 bg-transparent lg:bg-purple-700 lg:hover:bg-purple-800 lg:py-3 lg:px-6 lg:rounded-full uppercase font-semibold ease-in-out duration-300'>Sign In</Link>
+
+						{
+							userInfo ?
+							<Popover className='relative group mr-6 hidden lg:inline-flex'>
+								<Popover.Button className="outline-none items-center gap-x-1 inline-flex relative">
+									<div className="flex items-center gap-x-3">
+										<img src={Avatar} alt="User Avatar" className='w-12 p-2 rounded-full bg-zinc-200 h-auto' width="79" height="75" />
+										<p className="text-gray-100 font-bold uppercase text-sm">{userInfo.firstName}</p>
+									</div>
+								</Popover.Button>
+						
+								<Transition
+									as={Fragment}
+									enter="transition ease-out duration-200"
+									enterFrom="opacity-0 translate-y-1"
+									enterTo="opacity-100 translate-y-0"
+									leave="transition ease-in duration-150"
+									leaveFrom="opacity-100 translate-y-0"
+									leaveTo="opacity-0 translate-y-1"
+								>
+									<Popover.Panel className="absolute -right-12 z-10 mt-14 flex px-4 min-w-[200px]">
+									<div className="flex-auto overflow-hidden rounded-md bg-white text-sm leading-6 shadow-lg">
+										<div className="w-full">
+											<Link to='/registration/signup' className="block px-4 py-3 w-full hover:bg-purple-200 hover:text-purple-800 text-start uppercase font-medium text-gray-500 ease-in-out duration-300">Account</Link>
+											<hr />
+											<button onClick={logout} className="px-4 py-3 w-full hover:bg-purple-200 hover:text-purple-800 text-start uppercase font-medium text-gray-500 ease-in-out duration-300">log out</button>
+										</div>
+									</div>
+									</Popover.Panel>
+								</Transition>
+							</Popover>
+						
+							:
+							<Link to='registration/' className='lg:text-sm text-gray-100 bg-transparent lg:bg-purple-700 lg:hover:bg-purple-800 lg:py-3 lg:px-6 lg:rounded-full uppercase font-semibold ease-in-out duration-300'>Sign In</Link>
+						}
+
 					</div>
 				</div>
 			</Container>

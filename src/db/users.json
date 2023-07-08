@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "email": "ahmad.gharaibeh@gmail.com",
+      "password": "$2a$10$J6bAul9aC6NnUGeu0dk26etBubHUXUcZ9Tz5i3rn9jCyLnzZgkmiq",
+      "id": "04JTPMahHCbghLwqYDIJK",
+      "firstName": "ahmad",
+      "lastName": "gharaibeh",
+      "userType": "auther"
+    },
+    {
+      "email": "john@yahoo.com",
+      "password": "$2a$10$ZeZ6DC/J06Agi9efwCAE3Ofs26zzQA4IK6.beitwO43YWX0zbl69G",
+      "id": "wUTorddvMyFFT8DHd-EX_",
+      "firstName": "John",
+      "lastName": "Doe",
+      "userType": "auther"
+    },
+    {
+      "email": "hani@hotmail.com",
+      "password": "$2a$10$XoGp6/kvhcb0i5KZZYGBv.LwtASYOAPWrn8Rmuir5cpcToCpwLWdC",
+      "id": "cOpdo4cPl_ek16D9ibcF2",
+      "firstName": "Hani",
+      "lastName": "Salam",
+      "userType": "auther"
+    }
+  ]
+}

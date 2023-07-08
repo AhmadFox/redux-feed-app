@@ -1,10 +1,20 @@
-import React, { Fragment } from 'react'
-import { Route, Routes, Outlet, Link } from 'react-router-dom';
+import React, { Fragment, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Route, Routes, Outlet, Link, useNavigate } from 'react-router-dom';
 
 import Logo from '../assets/images/logo.svg'
 import Section from '../components/ui/Section';
 
 const Registration = () => {
+
+	const navigate = useNavigate();
+	const { user } = useSelector((state) => state.auth.user);
+
+	useEffect(() => {
+
+		user && navigate('/')
+
+	}, [ user ])
 
 	return (
 		<Fragment>

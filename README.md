@@ -15,7 +15,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 ### `npm server`
 
 Runs json-server and json-server-auth mode.\
-Open [http://localhost:3001](http://localhost:3001) to view it in your browser.
+Open [http://localhost:3001/users](http://localhost:3001/users) to view it in your browser.
 
 You may also see any lint errors in the console and all server requests.
 

@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 
-import { postAdded, postUpdate } from '../../store/postSlice';
+import { createPost, updatePost } from '../../store/postSlice';
 
 const PostForm = ({btnCaption, setSave, isModal, post}) => {
 
 	const categorys = useSelector(state => state.categorys );
+	const author = useSelector(state => state.auth.user.user );
 
 	const [ title, setTitle ] = useState( post ? post.title : '' );
 	const [ content, setContent ] = useState( post ? post.content : '' );
@@ -24,16 +25,6 @@ const PostForm = ({btnCaption, setSave, isModal, post}) => {
 
 	}
 
-	useEffect(() => {
-
-		const formFields = document.querySelectorAll('[required]')
-		formFields.forEach(el => {
-			title === '' || content === '' || category === '' ? setValidForm(false) : setValidForm(true)
-		});
-
-	}, [title, content, category])
-
-
 	// Dispatch data to reducer
 	const dispatch = useDispatch();
 
@@ -44,14 +35,14 @@ const PostForm = ({btnCaption, setSave, isModal, post}) => {
 		const date = new Date();
 		const dateFormat = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
 
-		const insertDtate = postAdded({
+		const insertDtate = createPost({
 			id: nanoid(),
 			title,
 			content,
 			category: categorys.find((item) => item.value == category ),
 			date: dateFormat,
-			user: {
-				name: 'Hani Salam', id: 5, account: 'auther'
+			author: {
+				name: `${author.firstName} ${author.lastName}`, id: author.id
 			}
 		});
 
@@ -62,13 +53,22 @@ const PostForm = ({btnCaption, setSave, isModal, post}) => {
 
 		validForm &&
 			post ?
-				dispatch(postUpdate({ id: post.id, title, content, category: categorys.find((item) => item.value == category ) })) :
-				dispatch(insertDtate) 
+				dispatch(updatePost({ id: post.id, title, content, category: categorys.find((item) => item.value == category ) })) :
+				dispatch(insertDtate)
 		
 		post && setSave(false)
 
 		isModal && isModal(false)
 	}
+
+	useEffect(() => {
+
+		const formFields = document.querySelectorAll('[required]')
+		formFields.forEach(el => {
+			title === '' || content === '' || category === '' ? setValidForm(false) : setValidForm(true)
+		});
+
+	}, [title, content, category])
 
 	return (
 		<form onSubmit={submitHandler} action="" className='grid grid-cols-2 gap-4'>

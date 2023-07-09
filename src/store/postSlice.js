@@ -1,32 +1,129 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const initialState = [
-    {id: 1, title: 'First Post!', category: { name: 'Deploiment', value: 4, color: 'cyan', }, content: 'Hello', date: 'Jun 12, 2023', user: {name: 'Ahmad Gharaibeh', id: 1, account: 'admin'}},
-    {id: 2, title: 'Secound Post!',  category: { name: 'Security', value: 3, color: 'amber', }, content: 'More Next', date: 'Jun 7, 2023', user: {name: 'John Doe', id: 2, account: 'auther'}},
-    {id: 3, title: 'Therd Post!', category: { name: 'REST API', value: 2, color: 'rose', }, content: 'Lorm Ipsom', date: 'May, 22 2023', user: {name: 'Semantha Lowe', id: 3, account: 'auther'}},
-    {id: 4, title: 'Fourth Post!', category: { name: 'Web 3.0', value: 6, color: 'blue', }, content: 'Lorm Ipsom', date: 'May, 20 2023', user: {name: 'Ahmad Gharaibeh', id: 1, account: 'admin'}},
-];
+// Get Posts From API
+export const getPosts = createAsyncThunk('post/getPosts', async(_, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+		const res = await fetch('http://localhost:3001/posts');
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        return rejectWithValue(error.message); 
+    }
+});
+
+// Get Single Post By ID
+export const getSinglePost = createAsyncThunk('post/getSinglePost', async(postId, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+		const res = await fetch(`http://localhost:3001/posts/${postId}`);
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        return rejectWithValue(error.message); 
+    }
+});
+
+// Create New Post
+export const createPost = createAsyncThunk('post/createPost', async(postData, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+		// postData.userName = getState().auth.name;
+        const res = await fetch('http://localhost:3001/posts', {
+            method: 'POST',
+            body: JSON.stringify(postData),
+            headers: {
+                'Content-type' : 'application/json; charset=UTF-8'
+            }
+        });
+		const data = await res.json();
+        return data;
+    } catch (error) {
+        return rejectWithValue(error.message); 
+    }
+});
+
+// Update Existing Post
+export const updatePost = createAsyncThunk('post/updatePost', async(postData, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+        const res = await fetch(`http://localhost:3001/posts/${postData.id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(postData),
+            headers: {
+                'Content-type' : 'application/json; charset=UTF-8'
+            }
+        });
+		const data = await res.json();
+        return data;
+    } catch (error) {
+        return rejectWithValue(error.message); 
+    }
+});
+
 
 const postsSlice = createSlice({
-  name: 'posts',
-  initialState,
-  reducers: {
-    postAdded(state, action) {
-      state.push(action.payload);
-    },
-    postUpdate(state, action) {
-      const { id, title, category, content, date } = action.payload;
-      const existingPost = state.find( post => post.id === id);
-      if ( existingPost ) {
-        existingPost.title = title;
-        existingPost.category = category;
-        existingPost.content = content;
-        existingPost.date = date;
-      }
-    }
-  }
-})
+	name: 'post',
+	initialState: { posts: [], isLoading: false },
+	extraReducers: {
 
-export const { postAdded, postUpdate } = postsSlice.actions;
+		// Get Posts
+		[getPosts.pending]: (state, action) => {
+            state.isLoading = true;
+            state.error = null;
+        },
+        [getPosts.fulfilled]: (state, action) => {
+            state.isLoading = false;
+            state.posts = action.payload;
+        },
+        [getPosts.rejected]: (state, action) => {
+            state.isLoading = false;
+            state.error = action.payload;
+        },
+
+		// Get Single Post
+		[getSinglePost.pending]: (state, action) => {
+            state.isLoading = true;
+            state.error = null;
+        },
+        [getSinglePost.fulfilled]: (state, action) => {
+            state.isLoading = false;
+            state.post = action.payload;
+        },
+        [getSinglePost.rejected]: (state, action) => {
+            state.isLoading = false;
+            state.error = action.payload;
+        },
+
+		// Create Post
+		[createPost.pending]: (state, action) => {
+            state.isLoading = true;
+            state.error = null;
+        },
+        [createPost.fulfilled]: (state, action) => {
+            state.isLoading = false;
+            state.posts.push(action.payload);
+        },
+        [createPost.rejected]: (state, action) => {
+            state.isLoading = false;
+            state.error = action.payload;
+        },
+
+        // Update Post
+		[updatePost.pending]: (state, action) => {
+            state.isLoading = true;
+            state.error = null;
+        },
+        [updatePost.fulfilled]: (state, action) => {
+            state.isLoading = false;
+            state.post = action.payload;
+        },
+        [updatePost.rejected]: (state, action) => {
+            state.isLoading = false;
+            state.error = action.payload;
+        },
+		
+	}
+})
 
 export default postsSlice.reducer;

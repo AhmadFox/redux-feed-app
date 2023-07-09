@@ -8,32 +8,32 @@ const initialState = [
 		disabled: true
 	},
 	{
-		name: 'Web Design',
+		name: 'Technology',
 		value: 1,
 		color: 'blue',
 	},
 	{
-		name: 'REST API',
+		name: 'Sport',
 		value: 2,
 		color: 'rose',
 	},
 	{
-		name: 'Security',
+		name: 'Economy',
 		value: 3,
 		color: 'amber',
 	},
 	{
-		name: 'Deploiment',
+		name: 'Travel',
 		value: 4,
 		color: 'cyan',
 	},
 	{
-		name: 'Web 3.0',
+		name: 'Health',
 		value: 5,
 		color: 'lime',
 	},
 	{
-		name: 'Software Architect',
+		name: 'Life Style',
 		value: 6,
 		color: 'pink',
 	},

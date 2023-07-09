@@ -30,8 +30,6 @@ const LoginForm = ({addStyle}) => {
 			email === '' || password === '' ? setValidForm(false) : setValidForm(true)
 		});
 
-		// user && navigate('/')
-
 	}, [ email, password, validForm ])
 
 	// Dispatch data to reducer

@@ -1,17 +1,30 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// Post New User Account On Data Base
-export const createUser = createAsyncThunk('user/createUser', async(userkData, thunkAPI) => {
+// Create New User Account On Data Base
+export const createUser = createAsyncThunk('user/createUser', async(userData, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-        const res = await fetch('http://localhost:3001/users/register', {
+        const resAuth = await fetch('http://localhost:3001/register', {
             method: 'POST',
-            body: JSON.stringify(userkData),
+            body: JSON.stringify(userData),
             headers: {
                 'Content-type' : 'application/json; charset=UTF-8'
             }
         });
-        const data = await res.json();
+        const resUser = await fetch('http://localhost:3001/authors', {
+            method: 'POST',
+            body: JSON.stringify({
+                "id": userData.id,
+                "name": `${userData.firstName} ${userData.lastName}`,
+                "email": userData.email,
+                "userType": "author",
+                "bio": 'Bio data'
+            }),
+            headers: {
+                'Content-type' : 'application/json; charset=UTF-8'
+            }
+        });
+        const data = await resAuth.json();
         data.accessToken && sessionStorage.setItem("access_token", data.accessToken);
         return data;
     } catch (error) {
@@ -19,7 +32,7 @@ export const createUser = createAsyncThunk('user/createUser', async(userkData, t
     }
 });
 
-// Post New User Account On Data Base
+// Login User Account On Data Base
 export const loginUser = createAsyncThunk('user/loginUser', async(userData, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
@@ -38,23 +51,7 @@ export const loginUser = createAsyncThunk('user/loginUser', async(userData, thun
     }
 });
 
-// Get Selected User By Session Id
-export const getUser = createAsyncThunk('user/getUser', async(user, thunkAPI) => {
-    const { rejectWithValue } = thunkAPI;
-    try {
-        const res = await fetch(`http://localhost:3001/users/${user.id}`, {
-            method: 'GET',
-            headers: {
-                'Content-type' : 'application/json; charset=UTF-8'
-            }
-        });
-        const data = await res.json();
-        return data;
-    } catch (error) {
-       return rejectWithValue(error.message); 
-    }
-});
-
+// Logout user from redux
 export const logout = createAsyncThunk('user/logOut', async(userLogState, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
@@ -78,20 +75,6 @@ const authSlice = createSlice({
             state.user = action.payload;
         },
         [createUser.rejected]: (state, action) => {
-            state.isLoading = false;
-            state.error = action.payload;
-        },
-
-		// Get User Account
-		[getUser.pending]: (state, action) => {
-            state.isLoading = true;
-            state.error = null;
-        },
-        [getUser.fulfilled]: (state, action) => {
-            state.isLoading = false;
-            state.user = action.payload;
-        },
-        [getUser.rejected]: (state, action) => {
             state.isLoading = false;
             state.error = action.payload;
         },

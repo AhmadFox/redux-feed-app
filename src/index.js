@@ -18,7 +18,7 @@ import Error from './page/Error';
 
 // Pages
 import Home from './page/Home';
-import Authers from './page/Authers';
+import Authors from './page/Authors';
 import About from './page/About';
 import Posts from './page/Posts';
 
@@ -26,7 +26,7 @@ import Posts from './page/Posts';
 import LoginForm from './components/form/LoginForm';
 import SignupForm from './components/form/SignupForm';
 import SinglePost from './components/post/SinglePost';
-import AutherProfile from './components/auther/AutherProfile';
+import AuthorProfile from './components/author/AuthorProfile';
 
 
 // Router Map
@@ -42,15 +42,15 @@ const routers = createBrowserRouter([
         element: <Home />
       },
       {
-        path: '/authers',
+        path: '/authors',
         children: [
           {
             index: true,
-            element: <Authers />
+            element: <Authors />
           },
           {
             path: ':userId',
-            element: <AutherProfile />
+            element: <AuthorProfile />
           }
         ]
       },

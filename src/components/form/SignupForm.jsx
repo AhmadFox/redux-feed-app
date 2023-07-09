@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { nanoid } from '@reduxjs/toolkit';
 
 import { createUser } from '../../store/authSlice';
 
@@ -45,7 +44,7 @@ const SignupForm = () => {
 	const submitHandler = (event) => {
 
 		event.preventDefault();
-		validForm && dispatch( createUser({ id: nanoid(), firstName, lastName, email, password, userType: 'auther' }) );
+		validForm && dispatch( createUser({ firstName, lastName, email, password }) );
 
 	}
 

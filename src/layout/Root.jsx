@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Outlet, Link } from "react-router-dom";
 
@@ -29,7 +29,14 @@ const Root = () => {
 	const userLogin = (param) => {
 
 		param === false && dispatch(logout([]));
+
 	}
+
+	useEffect(() => {
+
+		user && setModalLogin(false);
+
+	}, [ user, ModalLogin ]);
 
 
 	return (

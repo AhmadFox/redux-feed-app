@@ -1,13 +1,24 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { getAuthors } from '../store/authorSlice';
+
 
 import InputBox from './form/InputBox';
-import AutherBox from './auther/AutherBox';
+import AuthorBox from './author/AuthorBox';
 
 const SideBar = () => {
 
-	const users = useSelector( state => state.users);
+	const dispatch = useDispatch();
+	const { authors, isLoading } = useSelector( (state) => state.authors);
+
+	useEffect(() => {
+
+		dispatch(getAuthors(''))
+
+	}, [ dispatch ]);
+
 
 	return (
 		<aside className='xl:bg-white xl:shadow-lg xl:px-4 xl:py-6 rounded-lg mb-9 xl:mb-0'>
@@ -38,13 +49,13 @@ const SideBar = () => {
 						<span className="text-sm uppercase text-gray-500 font-medium">(4)</span>
 					</li>
 				</ul>
-				<p className="text-gray-500 font-bold text-lg uppercase">Authers</p>
+				<p className="text-gray-500 font-bold text-lg uppercase">Authors</p>
 				<hr className='mt-3 mb-5' />
 				<div className="grid gap-y-6">
-					{ users.map( user => (
-						<AutherBox key={user.id} id={user.id} autherName={`${user.firstName} ${user.lastName}`} postCount={user.postCount} />
+					{ authors && authors.map( author => (
+						<AuthorBox key={author.id} id={author.id} authorName={author.name} postCount={author.postCount} />
 					)) }
-					<Link to='authers' className='text-center text-purple-600 hover:text-purple-800 capitalize ease-in-out duration-300'>View All Authers</Link>
+					<Link to='authors' className='text-center text-purple-600 hover:text-purple-800 capitalize ease-in-out duration-300'>View All Authors</Link>
 				</div>
 			</div>
 		</aside>

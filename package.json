@@ -19,8 +19,8 @@
     "json-server-auth": "^2.1.0"
   },
   "scripts": {
-    "start": "(json-server src/db/users.json -m ./node_modules/json-server-auth --port 3001) & react-scripts start ",
-    "server": "json-server src/db/users.json -m ./node_modules/json-server-auth --port 3001",
+    "start": "react-scripts start & npm run server",
+    "server": "json-server src/db/*.json -m ./node_modules/json-server-auth --port 3001",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -1,25 +1,25 @@
-## About Redux Feed App:
+## 🚀 About Redux Feed App:
 
 Example React js app using Redux ToolKit and React Router 6 styled and decorated using Tailwind css, the backend API server using builtin json-server and json-server-auth installed in the sam reposotory. From this app visitor can view and read post, authors, sort post by category and view authors postes. and visitor can sign up for new account or login to an existing account by requsit to json-server-auth with fack tokens, to write, edit  posts.
 
-## Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
+## 🕹️ Available Scripts
 
 In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Runs the app in the development mode and run json-server.\
+- Open [http://localhost:3000](http://localhost:3000) to view App in your browser.\
+- Open [http://localhost:3001](http://localhost:3001) to view Database in your browser.\
 
 
 ### `npm server`
 
-Runs json-server and json-server-auth mode.\s
-Open [http://localhost:3001/users](http://localhost:3001/auth) or (http://localhost:3001/users) or (http://localhost:3001/posts) to view it in your browser.
+Runs json-server and json-server-auth mode.\
+- Users: (http://localhost:3001/users)\
+- Posts: (http://localhost:3001/posts)\
+- Categorys: (http://localhost:3001/categorys)\
+- Authors: (http://localhost:3001/authors)\
 
 You may also see any lint errors in the console and all server requests.
 
@@ -48,7 +48,7 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## ℹ️ Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
@@ -70,10 +70,23 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/m
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+### 🕸 Deployment
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+## 🤖 Tech Stack
+
+**Client:** react.js, Redux Toolkit, React Router 6, TailwindCSS
+
+**Server:** JSON server, JSON server auth, Node.js
+
+## 🥷 About Me
+My name is AHMAD GHARAIBEH
+- [@AhmadFox](https://github.com/AhmadFox) : Ahmad Gharaibeh
+- [Linkedin](https://www.linkedin.com/in/dev-ahmad-gharaibeh) : Senior Software Enginee
+I'm a senior full stack developer with +8 years expreiance in (html, css, js, php, node.js,express, sql, mongo db, scss, webpack, gulp, wordpress, docker, react.js, next.js,redux) and more librarys and framwork to build modren, fast, conveniant web and mobile apps.

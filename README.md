@@ -4,6 +4,11 @@ Example React js app using Redux ToolKit and React Router 6 styled and decorated
 
 From this app visitor can view and read post, authors, sort post by category and view authors postes. and visitor can sign up for new account or login to an existing account by requsit to json-server-auth with fack tokens, to write, edit  posts.
 
+## Demo
+
+Check out the basic startup the project
+- [Demo](https://ahmadfox.github.io/redux-feed-app)
+
 ## 🕹️ Available Scripts
 
 In the project directory, you can run:

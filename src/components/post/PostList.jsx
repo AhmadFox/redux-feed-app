@@ -1,22 +1,25 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import PostBox from './PostBox';
+import IndicatorPostList from '../indicator/IndicatorPostList';
+  
 
-const PostList = () => {
-
-	const posts = [
-		{id: '1', title: 'First Post!', content: 'Hello', date: '12 Jun 2023', user: [{name: 'Ahmad Gharaibeh'}, {id: 1}, {account: 'admin'}]},
-		{id: '2', title: 'Secound Post!', content: 'More Next', date: '7 Jun 2023', user: [{name: 'John Doe'}, {id: 2}, {account: 'auther'}]},
-		{id: '3', title: 'Therd Post!', content: 'Lorm Ipsom', date: '22 May 2023', user: [{name: 'Semantha Lowe'}, {id: 3}, {account: 'auther'}]},
-	];
-
-	const postsRender = posts.map(item => (
-		<PostBox key={item.id} title={item.title} content={item.content} id={item.id} user={item.user} date={item.date} />
-	));
+const PostList = ({posts, loading}) => {
 	
 	return (
 		<div className='grid gap-y-6 xl:gap-y-9'>
-			{postsRender}
+			{
+				loading ?
+				<Fragment>
+					<IndicatorPostList />
+					<IndicatorPostList />
+					<IndicatorPostList />
+				</Fragment>
+				:
+				posts && posts.map((post) => (
+					<PostBox key={post.id} post={post} />
+				))
+			}
 		</div>
 	)
 }

@@ -1,0 +1,78 @@
+{
+  "users": [
+    {
+      "email": "ahmad@gmail.com",
+      "password": "$2a$10$LLgZOvMfakSqitCcmaLoDeWxsYzFrTxADtI3Rcdrl/tYMlsHj6aPS",
+      "firstName": "Ahmad",
+      "lastName": "Gharaibeh",
+      "id": 1
+    },
+    {
+      "email": "john.doe@yahoo.com",
+      "password": "$2a$10$atw3xn01V0FBlhk7LPmDN.k4fQ2f4.4POi22oiqtBW2HI92lhlSNi",
+      "firstName": "John",
+      "lastName": "Doe",
+      "id": 2
+    },
+    {
+      "email": "hani.salam@hotmail.com",
+      "password": "$2a$10$fLKEUSd7F1/nDlplooyqZu9YTpt1o5HMCFv4bnGXYP8hBf0AH3.c6",
+      "firstName": "Hani",
+      "lastName": "Salam",
+      "id": 3
+    }
+  ],
+  "posts": [],
+  "authors": [],
+  "categorys": [
+    {
+      "id": "0",
+      "name": "Select Category",
+      "value": "",
+      "color": "",
+      "disabled": true
+    },
+    {
+      "id": "1",
+      "name": "Technology",
+      "value": 1,
+      "color": "blue",
+      "postCount": 0
+    },
+    {
+      "id": "2",
+      "name": "Sport",
+      "value": 2,
+      "color": "rose",
+      "postCount": 0
+    },
+    {
+      "id": "3",
+      "name": "Economy",
+      "value": 3,
+      "color": "amber",
+      "postCount": 0
+    },
+    {
+      "id": "4",
+      "name": "Travel",
+      "value": 4,
+      "color": "cyan",
+      "postCount": 0
+    },
+    {
+      "id": "5",
+      "name": "Health",
+      "value": 5,
+      "color": "lime",
+      "postCount": 0
+    },
+    {
+      "id": "6",
+      "name": "Life Style",
+      "value": 6,
+      "color": "pink",
+      "postCount": 0
+    }
+  ]
+}

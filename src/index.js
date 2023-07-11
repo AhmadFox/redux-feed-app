@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+
+import store from './store/store';
 
 // Styles
 import './assets/styles/index.css';
@@ -15,15 +18,16 @@ import Error from './page/Error';
 
 // Pages
 import Home from './page/Home';
-import Authers from './page/Authers';
+import Authors from './page/Authors';
 import About from './page/About';
 import Posts from './page/Posts';
 
 // Components
 import LoginForm from './components/form/LoginForm';
 import SignupForm from './components/form/SignupForm';
-import Post from './components/post/Post';
-import AutherProfile from './components/auther/AutherProfile';
+import SinglePost from './components/post/SinglePost';
+import AuthorProfile from './components/author/AuthorProfile';
+import Category from './components/category/Category';
 
 
 // Router Map
@@ -39,15 +43,15 @@ const routers = createBrowserRouter([
         element: <Home />
       },
       {
-        path: '/authers',
+        path: '/authors',
         children: [
           {
             index: true,
-            element: <Authers />
+            element: <Authors />
           },
           {
-            path: ':id',
-            element: <AutherProfile />
+            path: ':userId',
+            element: <AuthorProfile />
           }
         ]
       },
@@ -63,8 +67,21 @@ const routers = createBrowserRouter([
             element: <Posts />
           },
           {
-            path: ':id',
-            element: <Post />
+            path: ':postId',
+            element: <SinglePost />
+          }
+        ]
+      },
+      {
+        path: '/category',
+        children: [
+          {
+            index: true,
+            element: <Home />
+          },
+          {
+            path: ':categoryId',
+            element: <Category />
           }
         ]
       }
@@ -92,7 +109,11 @@ const routers = createBrowserRouter([
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<RouterProvider router={routers}/>);
+root.render(
+  <Provider store={store}>
+    <RouterProvider router={routers}/>
+  </Provider>
+  );
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

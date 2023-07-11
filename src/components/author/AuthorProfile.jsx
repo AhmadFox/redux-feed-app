@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { getAuthors } from '../../store/authorSlice';
+import { getAuthor } from '../../store/authorSlice';
 import { getPosts } from '../../store/postSlice';
 
 import Section from '../ui/Section';
@@ -14,14 +14,14 @@ const AuthorProfile = () => {
 	const { userId } = useParams();
 	const disbatch = useDispatch();
 
-	const { authors, isLoading } = useSelector( (state) => state.authors);
-	const { posts } = useSelector((state) =>  state.posts);
+	const { author, isLoading } = useSelector( (state) => state.authors);
 
-	
+	console.log(author);
+	const { posts } = useSelector((state) =>  state.posts);
 
 	useEffect(() => {
 
-		disbatch(getAuthors(parseInt(userId)));
+		disbatch(getAuthor(parseInt(userId)));
 		disbatch(getPosts());
 
 	}, [ disbatch ]);
@@ -31,11 +31,11 @@ const AuthorProfile = () => {
 	return (
 		<Section addStyle={'lg:w-10/12 mx-auto'}>
 			{
-			  !isLoading && 
+			author && 
 				<Fragment>
-					<AuthorBox addStyle={'mb-6'} key={authors.id} id={authors.id} authorName={authors.name} postCount={authors.postCount} />
+					<AuthorBox addStyle={'mb-6'} key={author.id} id={author.id} authorName={author.name} postCount={author.postCount} />
 		
-					<p className='text-gray-600'><b>Bio:</b> {authors.bio}</p>
+					<p className='text-gray-600'><b>Bio:</b> {author.bio}</p>
 				</Fragment>
 			}
 

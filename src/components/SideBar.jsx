@@ -17,7 +17,7 @@ const SideBar = () => {
 
 	useEffect(() => {
 
-		dispatch(getAuthors(''))
+		dispatch(getAuthors())
 		dispatch(getCategorys())
 
 	}, [ dispatch ]);

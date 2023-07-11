@@ -4,33 +4,33 @@ import { nanoid } from '@reduxjs/toolkit';
 
 import { createPost, updatePost } from '../../store/postSlice';
 import { getCategorys, categoryPostCount } from '../../store/categorySlice';
-import { createAuthor } from '../../store/authorSlice';
+import { getAuthor, createAuthor, authorPostCount } from '../../store/authorSlice';
 
 const PostForm = ({btnCaption, setSave, isModal, post}) => {
 
+	const dispatch = useDispatch();
+
 	const { user } = useSelector((state) => state.auth.user );
 	const { categorys } = useSelector((state) => state.categorys);
-	
+	const { author, isLoading } = useSelector( (state) => state.authors);
+
 	const [ title, setTitle ] = useState( post ? post.title : '' );
 	const [ content, setContent ] = useState( post ? post.content : '' );
 	const [ category, setCategory ] = useState(  post ? post.category.value : '' );
 	const [ validForm, setValidForm ] = useState(false);
-
+	
 	// Form Valedation And Set Field Value
 	const onChangeHandler = (e) => {
 		
 		e.target.name === 'title' && setTitle(e.target.value)
 		e.target.name === 'content' && setContent(e.target.value)
 		e.target.name === 'category' && setCategory(e.target.value)
-
 		e.target.value === '' ? e.target.classList.add('invalid') : e.target.classList.remove('invalid')
 
 	}
 
-	// Dispatch data to reducer
-	const dispatch = useDispatch();
-
 	const submitHandler = (event) => {
+
 		event.preventDefault();
 
 		// Format Date
@@ -38,9 +38,9 @@ const PostForm = ({btnCaption, setSave, isModal, post}) => {
 		const dateFormat = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 
 		// Update Category
-		const categoryItem = categorys.find((item) => item.value == category )
+		const categoryItem = categorys.find((item) => item.value == category );
 
-
+		// Decleration Post Obj
 		const insertDtate = createPost({
 			id: nanoid(),
 			title,
@@ -58,33 +58,49 @@ const PostForm = ({btnCaption, setSave, isModal, post}) => {
 			}
 		});
 
+		// Clear Form Fields
 		setTitle('')
 		setContent('')
 		setCategory('')
 		setValidForm(false)
 
-		validForm &&
-			post ?
-				dispatch(updatePost({ id: post.id, title, content, category: categorys.find((item) => item.value == category ) })) :
-				dispatch(insertDtate) && user.postCount < 1 && dispatch(createAuthor({ 
+		// Post Form
+		if ( validForm ) { // Check if form fields not empty
+			if ( post ) { // check if it's edite mode
+
+				setSave(false); // make save button enabled
+				dispatch(updatePost({ id: post.id, title, content, category: categorys.find((item) => item.value == category ) })); // Update current post
+
+			} else { // if it's NOT edit mode
+
+				dispatch(insertDtate); // create new post
+				dispatch(categoryPostCount({ id: category, count: categoryItem.postCount + 1 }));
+
+				author ? 
+				// Uodate Author Post Count
+				dispatch(authorPostCount({
+					id: user.id,
+					count:  author.postCount + 1
+				}))
+				:
+				// Create New Author if author not exiest or it's first time to Post
+				dispatch(createAuthor({
 					"name": `${user.firstName} ${user.lastName}`,
 					"email": user.email,
 					"userType": "author",
-					"bio": "Bio data",
+					"bio": "This where can auther at next task can add his Bio data",
 					"id": user.id,
 					"postCount": 1
-				}));
+				}))
+				console.log('isAuthor: ', author);
+			}
+		}
 
-			!post && dispatch(categoryPostCount({
-				id: category,
-				count: categoryItem.postCount + 1
-			}));
-		
-		post && setSave(false)
-
-		isModal && isModal(false)
+		// Close/Open Post Modal If It's Modal Post
+		isModal && isModal(false);
 	}
 	
+	// Set Valedation Form
 	useEffect(() => {
 
 		const formFields = document.querySelectorAll('[required]')
@@ -95,11 +111,15 @@ const PostForm = ({btnCaption, setSave, isModal, post}) => {
 	}, [title, content]);
 
 
+	// Get Category List & Authers List
 	useEffect(() => {
 
+		dispatch(getAuthor(user.id));
 		dispatch(getCategorys());
 		
-	}, [dispatch])
+	}, [dispatch]);
+
+
 
 	return (
 		<form onSubmit={submitHandler} action="" className='grid grid-cols-2 gap-4'>
@@ -130,4 +150,4 @@ const PostForm = ({btnCaption, setSave, isModal, post}) => {
 	)
 }
 
-export default PostForm
+export default PostForm;

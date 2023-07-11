@@ -21,6 +21,9 @@ const Home = () => {
 
 	return (
 		<Section>
+
+		{
+			posts.length > 0 ?
 			<div className="grid grid-cols-12 gap-x-6">
 
 				<div className="col-span-12 xl:col-span-8 2xl:col-span-9 order-2 xl:order-1 xl:pr-6">
@@ -34,28 +37,8 @@ const Home = () => {
 					</Fragment>
 				}
 				
-				{
-					posts.length > 0 ?
-					<Fragment>
-
-						<p className="text-gray-700 text-xl font-bold mb-6">Post Feeds</p>
-						<PostList posts={posts} loading={isLoading} />
-
-					</Fragment>
-
-					:
-					<Fragment>
-						<p className="text-center text-2xl xl:text-3xl capitalize font-bold text-gray-500 mb-3">no Post Found!</p>
-						{
-							!user ?
-							<p className="text-gray-500 text-center capitalize">
-								<Link to='/registration/signup' className='font-medium text-purple-700'>Signup</Link> or 
-								<Link to='/registration' className='font-medium text-purple-700'> Login</Link> to publish post
-							</p> : ''
-						}
-							
-					</Fragment>
-				}
+				<p className="text-gray-700 text-xl font-bold mb-6">Post Feeds</p>
+				<PostList posts={posts} loading={isLoading} />
 
 				</div>
 
@@ -65,7 +48,26 @@ const Home = () => {
 					 
 				</div>
 
-			</div>
+			</div> :
+			<Fragment>
+				<p className="text-center text-2xl xl:text-3xl capitalize font-bold text-gray-500 mb-3">no Post Found!</p>
+				{
+					!user ?
+					<p className="text-gray-500 text-center capitalize">
+						<Link to='/registration/signup' className='font-medium text-purple-700'>Signup</Link> or 
+						<Link to='/registration' className='font-medium text-purple-700'> Login</Link> to publish post
+					</p> :
+					<div className='lg:w-10/12 xl:w-9/12 mx-auto'>
+						<p className="text-gray-800 text-xl font-bold capitalize mb-4">create post</p>
+						<PostForm />
+						<hr className='my-6' />
+					</div>
+				}
+					
+			</Fragment>
+
+
+		}
 		</Section>
 	)
 }

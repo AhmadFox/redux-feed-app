@@ -1,6 +1,8 @@
 ## 🚀 About Redux Feed App:
 
-Example React js app using Redux ToolKit and React Router 6 styled and decorated using Tailwind css, the backend API server using builtin json-server and json-server-auth installed in the sam reposotory. From this app visitor can view and read post, authors, sort post by category and view authors postes. and visitor can sign up for new account or login to an existing account by requsit to json-server-auth with fack tokens, to write, edit  posts.
+Example React js app using Redux ToolKit and React Router 6 styled and decorated using Tailwind css, the backend API server using builtin json-server and json-server-auth installed in the sam reposotory.\
+
+From this app visitor can view and read post, authors, sort post by category and view authors postes. and visitor can sign up for new account or login to an existing account by requsit to json-server-auth with fack tokens, to write, edit  posts.
 
 ## 🕹️ Available Scripts
 
@@ -9,17 +11,17 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode and run json-server.\
-- Open [http://localhost:3000](http://localhost:3000) to view App in your browser.\
-- Open [http://localhost:3001](http://localhost:3001) to view Database in your browser.\
+- Open [http://localhost:3000](http://localhost:3000) to view App in your browser.
+- Open [http://localhost:3001](http://localhost:3001) to view Database in your browser.
 
 
 ### `npm server`
 
-Runs json-server and json-server-auth mode.\
-- Users: (http://localhost:3001/users)\
-- Posts: (http://localhost:3001/posts)\
-- Categorys: (http://localhost:3001/categorys)\
-- Authors: (http://localhost:3001/authors)\
+Runs json-server and json-server-auth mode.
+- Users: (http://localhost:3001/users)
+- Posts: (http://localhost:3001/posts)
+- Categorys: (http://localhost:3001/categorys)
+- Authors: (http://localhost:3001/authors)
 
 You may also see any lint errors in the console and all server requests.
 

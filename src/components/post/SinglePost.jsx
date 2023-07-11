@@ -18,6 +18,7 @@ const SinglePost = () => {
   const { user } = useSelector((state) => state.auth.user);
   const { post } = useSelector((state) => state.posts);
   const { posts } = useSelector((state) => state.posts);
+  
   const disbatch = useDispatch();
 
   // Get Related Post For User
@@ -86,11 +87,7 @@ const SinglePost = () => {
 				  <span className="text-gray-600">|</span>
 				  <span className="text-gray-600 font-medium">{post.date}</span>
 				</div>
-				<span
-				  className={`px-4 py-2 rounded-full uppercase font-semibold text-xs text-white bg-${post.category.color}`}
-				>
-				  {post.category.name}
-				</span>
+				<Link to={`/category/${post.category.id}`} className={`px-4 py-2 rounded-full uppercase font-semibold text-xs text-white bg-${post.category.color}`}>{post.category.name}</Link>
 			  </div>
 
 			  <p className="text-gray-600 md:text-lg mb-6">{post.content}</p>

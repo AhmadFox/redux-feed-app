@@ -27,6 +27,7 @@ import LoginForm from './components/form/LoginForm';
 import SignupForm from './components/form/SignupForm';
 import SinglePost from './components/post/SinglePost';
 import AuthorProfile from './components/author/AuthorProfile';
+import Category from './components/category/Category';
 
 
 // Router Map
@@ -68,6 +69,19 @@ const routers = createBrowserRouter([
           {
             path: ':postId',
             element: <SinglePost />
+          }
+        ]
+      },
+      {
+        path: '/category',
+        children: [
+          {
+            index: true,
+            element: <Home />
+          },
+          {
+            path: ':categoryId',
+            element: <Category />
           }
         ]
       }

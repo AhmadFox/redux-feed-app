@@ -24,7 +24,7 @@ const Authors = () => {
 				<Fragment>
 					<h1 className="font-bold text-xl md:text-2xl text-gray-800 mb-6 md:mb-8 uppercase text-center lg:text-start">Authors List:</h1>
 					{
-						isLoading ?
+						!isLoading ?
 							<AuthorList authors={authors}/>
 						: <p>Loading .. </p>
 					}

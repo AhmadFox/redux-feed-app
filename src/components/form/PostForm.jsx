@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 
 import { createPost, updatePost } from '../../store/postSlice';
+import { getCategorys, categoryPostCount } from '../../store/categorySlice';
+import { createAuthor } from '../../store/authorSlice';
 
 const PostForm = ({btnCaption, setSave, isModal, post}) => {
 
-	const categorys = useSelector(state => state.categorys );
-	const author = useSelector(state => state.auth.user.user );
-
+	const { user } = useSelector((state) => state.auth.user );
+	const { categorys } = useSelector((state) => state.categorys);
+	
 	const [ title, setTitle ] = useState( post ? post.title : '' );
 	const [ content, setContent ] = useState( post ? post.content : '' );
 	const [ category, setCategory ] = useState(  post ? post.category.value : '' );
@@ -33,16 +35,26 @@ const PostForm = ({btnCaption, setSave, isModal, post}) => {
 
 		// Format Date
 		const date = new Date();
-		const dateFormat = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+		const dateFormat = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
+		// Update Category
+		const categoryItem = categorys.find((item) => item.value == category )
+
 
 		const insertDtate = createPost({
 			id: nanoid(),
 			title,
 			content,
-			category: categorys.find((item) => item.value == category ),
+			category: {
+				id: categoryItem.id,
+				name: categoryItem.name,
+				value: categoryItem.value,
+				color: categoryItem.color,
+				postCount: categoryItem.postCount + 1
+			},
 			date: dateFormat,
 			author: {
-				name: `${author.firstName} ${author.lastName}`, id: author.id
+				name: `${user.firstName} ${user.lastName}`, id: user.id
 			}
 		});
 
@@ -54,13 +66,25 @@ const PostForm = ({btnCaption, setSave, isModal, post}) => {
 		validForm &&
 			post ?
 				dispatch(updatePost({ id: post.id, title, content, category: categorys.find((item) => item.value == category ) })) :
-				dispatch(insertDtate)
+				dispatch(insertDtate) && user.postCount < 1 && dispatch(createAuthor({ 
+					"name": `${user.firstName} ${user.lastName}`,
+					"email": user.email,
+					"userType": "author",
+					"bio": "Bio data",
+					"id": user.id,
+					"postCount": 1
+				}));
+
+			!post && dispatch(categoryPostCount({
+				id: category,
+				count: categoryItem.postCount + 1
+			}));
 		
 		post && setSave(false)
 
 		isModal && isModal(false)
 	}
-
+	
 	useEffect(() => {
 
 		const formFields = document.querySelectorAll('[required]')
@@ -68,7 +92,14 @@ const PostForm = ({btnCaption, setSave, isModal, post}) => {
 			title === '' || content === '' || category === '' ? setValidForm(false) : setValidForm(true)
 		});
 
-	}, [title, content, category])
+	}, [title, content]);
+
+
+	useEffect(() => {
+
+		dispatch(getCategorys());
+		
+	}, [dispatch])
 
 	return (
 		<form onSubmit={submitHandler} action="" className='grid grid-cols-2 gap-4'>

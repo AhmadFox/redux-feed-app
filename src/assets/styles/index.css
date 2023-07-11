@@ -54,3 +54,27 @@ nav .active {
 .bg-pink {
     @apply bg-pink-500
 }
+
+.text-blue {
+    @apply text-blue-500
+}
+
+.text-rose {
+    @apply text-rose-500
+}
+
+.text-amber {
+    @apply text-amber-500
+}
+
+.text-cyan {
+    @apply text-cyan-500
+}
+
+.text-lime {
+    @apply text-lime-500
+}
+
+.text-pink {
+    @apply text-pink-500
+}

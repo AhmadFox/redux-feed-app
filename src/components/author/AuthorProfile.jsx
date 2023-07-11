@@ -13,22 +13,20 @@ const AuthorProfile = () => {
 
 	const { userId } = useParams();
 	const disbatch = useDispatch();
+
 	const { authors, isLoading } = useSelector( (state) => state.authors);
 	const { posts } = useSelector((state) =>  state.posts);
 
-	const postList = posts && posts.filter( post => post.author.id === userId)
-
-
-	console.log(userId);
-
+	
 
 	useEffect(() => {
 
-		disbatch(getAuthors(userId));
+		disbatch(getAuthors(parseInt(userId)));
 		disbatch(getPosts());
 
 	}, [ disbatch ]);
 
+	const relatedPost = posts.filter( post => post.author.id === parseInt(userId));
 
 	return (
 		<Section addStyle={'lg:w-10/12 mx-auto'}>
@@ -37,7 +35,7 @@ const AuthorProfile = () => {
 				<Fragment>
 					<AuthorBox addStyle={'mb-6'} key={authors.id} id={authors.id} authorName={authors.name} postCount={authors.postCount} />
 		
-					<p className='text-gray-600'>Bio: {authors.bio}</p>
+					<p className='text-gray-600'><b>Bio:</b> {authors.bio}</p>
 				</Fragment>
 			}
 
@@ -46,7 +44,7 @@ const AuthorProfile = () => {
 			<p className="text-gray-600 font-bold text-lg md:text-xl mb-4">Author Posts:</p>
 
 			{
-				posts && <PostList posts={postList} />
+				relatedPost && <PostList posts={relatedPost} loading={isLoading} />
 			}
 
 		</Section>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AuthorBox from '../../components/author/AuthorBox';
+import AuthorBox from './AuthorBox';
 
 const AuthorList = ({authors}) => {
 

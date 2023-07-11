@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+## About Redux Feed App:
+
+Example React js app using Redux ToolKit and React Router 6 styled and decorated using Tailwind css, the backend API server using builtin json-server and json-server-auth installed in the sam reposotory. From this app visitor can view and read post, authors, sort post by category and view authors postes. and visitor can sign up for new account or login to an existing account by requsit to json-server-auth with fack tokens, to write, edit  posts.
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

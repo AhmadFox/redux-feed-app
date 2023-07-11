@@ -4,27 +4,14 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const createUser = createAsyncThunk('user/createUser', async(userData, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-        const resAuth = await fetch('http://localhost:3001/register', {
+        const res = await fetch('http://localhost:3001/register', {
             method: 'POST',
             body: JSON.stringify(userData),
             headers: {
                 'Content-type' : 'application/json; charset=UTF-8'
             }
         });
-        const resUser = await fetch('http://localhost:3001/authors', {
-            method: 'POST',
-            body: JSON.stringify({
-                "id": userData.id,
-                "name": `${userData.firstName} ${userData.lastName}`,
-                "email": userData.email,
-                "userType": "author",
-                "bio": 'Bio data'
-            }),
-            headers: {
-                'Content-type' : 'application/json; charset=UTF-8'
-            }
-        });
-        const data = await resAuth.json();
+        const data = await res.json();
         data.accessToken && sessionStorage.setItem("access_token", data.accessToken);
         return data;
     } catch (error) {

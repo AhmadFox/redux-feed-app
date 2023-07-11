@@ -46,9 +46,14 @@ const Home = () => {
 					:
 					<Fragment>
 						<p className="text-center text-2xl xl:text-3xl capitalize font-bold text-gray-500 mb-3">no Post Found!</p>
-						<p className="text-gray-500 text-center capitalize">
-							<Link to='/registration/signup' className='font-medium text-purple-700'>Signup</Link> or 
-							<Link to='/registration' className='font-medium text-purple-700'> Login</Link> to publish post</p>
+						{
+							!user ?
+							<p className="text-gray-500 text-center capitalize">
+								<Link to='/registration/signup' className='font-medium text-purple-700'>Signup</Link> or 
+								<Link to='/registration' className='font-medium text-purple-700'> Login</Link> to publish post
+							</p> : ''
+						}
+							
 					</Fragment>
 				}
 

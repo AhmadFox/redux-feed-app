@@ -7,7 +7,7 @@ const PostBox = ( { post } ) => {
 		<article className='bg-white px-4 py-6 rounded-lg shadow-lg'>
 			<div className="flex justify-between items-center mb-4">
 				<h2 className="font-bold capitalize text-lg xl:text-xl text-gray-800">{post.title}</h2>
-				<span className={`px-4 py-2 rounded-full uppercase font-semibold text-xs text-white bg-${post.category.color}`}>{post.category.name}</span>
+				<Link to={`/category/${post.category.id}`} className={`px-4 py-2 rounded-full uppercase font-semibold text-xs text-white bg-${post.category.color}`}>{post.category.name}</Link>
 			</div>
 			<div className="flex items-center gap-x-2 mb-3">
 				<span className='text-gray-500 text-sm font-medium'>By: <Link to={`authors/${post.author.id}`} className='text-blue-500 text-sm font-medium capitalize'>{post.author.name}</Link></span>

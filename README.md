@@ -6,7 +6,7 @@ From this app visitor can view and read post, authors, sort post by category and
 
 ## Demo
 
-Check out the basic startup the project
+Check The demo App
 - [Demo](https://ahmadfox.github.io/redux-feed-app)
 
 ## 🕹️ Available Scripts

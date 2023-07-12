@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/redux-feed-app/static/css/main.7810c215.css",
+    "main.js": "/redux-feed-app/static/js/main.23b4393b.js",
+    "static/js/787.626d53ac.chunk.js": "/redux-feed-app/static/js/787.626d53ac.chunk.js",
+    "static/media/profile.webp": "/redux-feed-app/static/media/profile.f853b1c987e4d5fcb1f1.webp",
+    "static/media/react.webp": "/redux-feed-app/static/media/react.29fa26bc4f04cb63e685.webp",
+    "static/media/redux.webp": "/redux-feed-app/static/media/redux.970103e4ecbe286bf94c.webp",
+    "static/media/tailwind.webp": "/redux-feed-app/static/media/tailwind.cf7db21526d6ccc68ac4.webp",
+    "static/media/router.webp": "/redux-feed-app/static/media/router.939c96ef611e2216b127.webp",
+    "static/media/json.webp": "/redux-feed-app/static/media/json.84200de5c83c57720eea.webp",
+    "static/media/logo.svg": "/redux-feed-app/static/media/logo.4305b254541321c598bed3ac5c69b1cb.svg",
+    "index.html": "/redux-feed-app/index.html",
+    "main.7810c215.css.map": "/redux-feed-app/static/css/main.7810c215.css.map",
+    "main.23b4393b.js.map": "/redux-feed-app/static/js/main.23b4393b.js.map",
+    "787.626d53ac.chunk.js.map": "/redux-feed-app/static/js/787.626d53ac.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7810c215.css",
+    "static/js/main.23b4393b.js"
+  ]
+}
